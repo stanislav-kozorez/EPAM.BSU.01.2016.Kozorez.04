@@ -49,6 +49,11 @@
     <Compile Include="Task2\Rectangle.cs" />
     <Compile Include="Task2\Shape.cs" />
     <Compile Include="Task2\Triangle.cs" />
+    <Compile Include="Task3\Human.cs" />
+    <Compile Include="Task3\ManagementSystem.cs" />
+    <Compile Include="Task3\Student.cs" />
+    <Compile Include="Task3\Trainer.cs" />
+    <Compile Include="Task3\Training.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
