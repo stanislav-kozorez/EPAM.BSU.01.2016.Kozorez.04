@@ -8,22 +8,15 @@ namespace Logic.Task3
 {
     public class Trainer: Human
     {
-        private List<Training> trainings;
-
         public Trainer(string name, string surname)
-            : base(name, surname)
-        {
-            trainings = new List<Training>();
-        }
-
-        public List<Training> Trainings { get { return trainings; } }
+            : base(name, surname) { }
 
         public void AnnounceNewTraining(string trainingName, int duration, DateTime start)
         {
             if (trainingName == null)
                 throw new ArgumentNullException($"{nameof(trainingName)}");
 
-            trainings.Add(new Training(trainingName, duration, start, this));
+            ManagementSystem.AddTraining(trainingName, duration, start, this);
         }
         
         public void AssignAGradeTo(Student student, byte mark)
@@ -39,7 +32,12 @@ namespace Logic.Task3
         /// </summary>
         public void CloseTraining(Training training)
         {
+            Random r = new Random();
+
             training.IsClosed = true;
+            foreach (var student in training.GetStudents())
+                AssignAGradeTo(student, (byte)r.Next(1, 11));
+            ManagementSystem.AddTrainingToArchive(training);
         }
 
     }

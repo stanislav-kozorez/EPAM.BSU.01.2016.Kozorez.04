@@ -14,10 +14,7 @@ namespace Logic.Task3
         public bool FinishedTraining { get; set; }
 
         public Student(string name, string surname) 
-            :base(name, surname)
-        {
-
-        }
+            :base(name, surname) { }
 
         public void RegisterForATraining(Training t)
         {
@@ -25,6 +22,7 @@ namespace Logic.Task3
                 throw new ArgumentNullException($"{nameof(t)} is null");
             currentTraining = t;
             FinishedTraining = false;
+            t.AddStudent(this);
         }
 
         public string LearnSomeMaterial()
