@@ -45,6 +45,7 @@
     <Compile Include="Task1\DelegateToInterface\ArraySort.cs" />
     <Compile Include="Task1\DelegateToInterface\IConditional.cs" />
     <Compile Include="Task1\DelegateToInterface\SortCondition.cs" />
+    <Compile Include="Task1\DelegateToInterface\SumCondition.cs" />
     <Compile Include="Task1\InterfaceToDelegate\AbsCondition.cs" />
     <Compile Include="Task1\InterfaceToDelegate\ArraySort.cs" />
     <Compile Include="Task1\InterfaceToDelegate\IConditional.cs" />
