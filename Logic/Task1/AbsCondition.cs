@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Task1
 {
-    class AbsCondition : IConditional
+    public class AbsCondition : IConditional
     {
         public int CheckCondition(int[] arr)
         {

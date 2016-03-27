@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Task1
 {
-    class SumCondition: IConditional
+    public class SumCondition: IConditional
     {
         public int CheckCondition(int[] arr)
         {

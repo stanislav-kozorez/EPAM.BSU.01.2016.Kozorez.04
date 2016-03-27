@@ -12,43 +12,43 @@ namespace Logic.Task1
         Descendent
     }
 
+    public delegate int SortDelegate(int[] arr);
+
     public static class ArraySort
     {
-
-        /// <summary>
-        /// Sorts the array in ascendent/descendent order by the sum of each row
-        /// </summary>
-        public static void SortByRowSum(int[][] arr, SortOrder order)
+        public static void Sort(int[][] arr, SortOrder order, IConditional condition)
         {
             if (arr == null)
                 throw new ArgumentNullException($"{nameof(arr)}");
-            Sort(arr, order, new SumCondition());
+            if (condition == null)
+                throw new ArgumentNullException($"{nameof(condition)}");
+            SortImplementation(arr, order, condition.CheckCondition);
         }
 
-        /// <summary>
-        /// Sorts the array in ascendent/descendent order by maximum absolut element of each row
-        /// </summary>
-        public static void SortByMaxAbsRowElement(int[][] arr, SortOrder order)
+        public static void Sort(int[][] arr, SortOrder order, SortDelegate condition)
         {
             if (arr == null)
                 throw new ArgumentNullException($"{nameof(arr)}");
-            Sort(arr, order, new AbsCondition());
+            if (condition == null)
+                throw new ArgumentNullException($"{nameof(condition)}");
+            SortImplementation(arr, order, condition);
         }
+
 
         #region Private methods
 
-        private static void Sort(int[][] arr, SortOrder order, IConditional condinion)
+        private static void SortImplementation(int[][] arr, SortOrder order, SortDelegate condition)
         {
             for (int i = 0; i < arr.Length - 1; i++)
                 for (int j = 0; j < arr.Length - i - 1; j++)
                     if (order == SortOrder.Ascendent)
                     {
-                        if ((arr[j] == null) || (arr[j + 1] != null && condinion.CheckCondition(arr[j]) > condinion.CheckCondition(arr[j + 1])))
+                        if ((arr[j] == null) || (arr[j + 1] != null && condition(arr[j]) > condition(arr[j + 1])))
                             Swap(arr, j);
                     }
                     else
                     {
-                        if ((arr[j] == null) || (arr[j + 1] != null && condinion.CheckCondition(arr[j]) < condinion.CheckCondition(arr[j + 1])))
+                        if ((arr[j] == null) || (arr[j + 1] != null && condition(arr[j]) < condition(arr[j + 1])))
                             Swap(arr, j);
                     }
         }

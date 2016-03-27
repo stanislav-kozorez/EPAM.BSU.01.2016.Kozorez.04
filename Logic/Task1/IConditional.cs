@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Task1
 {
-    interface IConditional
+    public interface IConditional
     {
         int CheckCondition(int[] arr);
     }
