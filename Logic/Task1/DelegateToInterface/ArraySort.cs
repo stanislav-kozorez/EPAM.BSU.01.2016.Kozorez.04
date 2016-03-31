@@ -6,51 +6,48 @@ using System.Threading.Tasks;
 
 namespace Logic.Task1.DelegateToInterface
 {
-    public enum SortOrder
-    {
-        Ascendent,
-        Descendent
-    }
-
-    public delegate int SortDelegate(int[] arr);
-
     public static class ArraySort
     {
-        public static void Sort(int[][] arr, SortOrder order, IConditional condition)
+        private class ComparerAdapter : IComparer<int[]>
         {
-            if (arr == null)
-                throw new ArgumentNullException($"{nameof(arr)}");
-            if (condition == null)
-                throw new ArgumentNullException($"{nameof(condition)}");
-            SortImplementation(arr, order, condition);
+            private Comparison<int[]> comparison;
+            public ComparerAdapter(Comparison<int[]> comparison)
+            {
+                this.comparison = comparison;
+            }
+            public int Compare(int[] x, int[] y)
+            {
+                return comparison(x, y);
+            }
         }
 
-        public static void Sort(int[][] arr, SortOrder order, SortDelegate condition)
+        public static void Sort(int[][] arr, IComparer<int[]> comparer)
         {
             if (arr == null)
                 throw new ArgumentNullException($"{nameof(arr)}");
-            if (condition == null)
-                throw new ArgumentNullException($"{nameof(condition)}");
-            SortImplementation(arr, order, new SortCondition(condition));
+            if (comparer == null)
+                throw new ArgumentNullException($"{nameof(comparer)}");
+            SortImplementation(arr, comparer);
+        }
+
+        public static void Sort(int[][] arr, Comparison<int[]> comparison)
+        {
+            if (arr == null)
+                throw new ArgumentNullException($"{nameof(arr)}");
+            if (comparison == null)
+                throw new ArgumentNullException($"{nameof(comparison)}");
+            SortImplementation(arr, new ComparerAdapter(comparison));
         }
 
 
         #region Private methods
 
-        private static void SortImplementation(int[][] arr, SortOrder order, IConditional condition)
+        private static void SortImplementation(int[][] arr, IComparer<int[]> comparer)
         {
             for (int i = 0; i < arr.Length - 1; i++)
                 for (int j = 0; j < arr.Length - i - 1; j++)
-                    if (order == SortOrder.Ascendent)
-                    {
-                        if ((arr[j] == null) || (arr[j + 1] != null && condition.CheckCondition(arr[j]) > condition.CheckCondition(arr[j + 1])))
-                            Swap(arr, j);
-                    }
-                    else
-                    {
-                        if ((arr[j] == null) || (arr[j + 1] != null && condition.CheckCondition(arr[j]) < condition.CheckCondition(arr[j + 1])))
-                            Swap(arr, j);
-                    }
+                    if (comparer.Compare(arr[j], arr[j + 1]) < 0)
+                        Swap(arr, j);
         }
 
         private static void Swap(int[][] arr, int index)

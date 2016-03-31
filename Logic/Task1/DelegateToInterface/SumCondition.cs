@@ -6,11 +6,22 @@ using System.Threading.Tasks;
 
 namespace Logic.Task1.DelegateToInterface
 {
-    public class SumCondition: IConditional
+    public class SumCondition: IComparer<int[]>
     {
-        public int CheckCondition(int[] arr)
+        public int Compare(int[] x, int[] y)
         {
-            return arr.Sum();
+            if (x == null && y == null)
+                return 0;
+            if (x == null)
+                return -1;
+            if (y == null)
+                return 1;
+            if (x.Sum() < y.Sum())
+                return 1;
+            else if (x.Sum() > y.Sum())
+                return -1;
+            else
+                return 0;
         }
     }
 }

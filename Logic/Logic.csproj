@@ -43,13 +43,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Task1\DelegateToInterface\AbsCondition.cs" />
     <Compile Include="Task1\DelegateToInterface\ArraySort.cs" />
-    <Compile Include="Task1\DelegateToInterface\IConditional.cs" />
-    <Compile Include="Task1\DelegateToInterface\SortCondition.cs" />
     <Compile Include="Task1\DelegateToInterface\SumCondition.cs" />
-    <Compile Include="Task1\InterfaceToDelegate\AbsCondition.cs" />
     <Compile Include="Task1\InterfaceToDelegate\ArraySort.cs" />
-    <Compile Include="Task1\InterfaceToDelegate\IConditional.cs" />
-    <Compile Include="Task1\InterfaceToDelegate\SumCondition.cs" />
     <Compile Include="Task2\Circle.cs" />
     <Compile Include="Task2\Rectangle.cs" />
     <Compile Include="Task2\Shape.cs" />
